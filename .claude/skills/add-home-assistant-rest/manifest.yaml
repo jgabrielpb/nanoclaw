@@ -1,0 +1,29 @@
+skill: add-home-assistant-rest
+version: 1.0.0
+description: "Add native Home Assistant REST integration to NanoClaw"
+core_version: 0.1.0
+adds:
+  - src/integrations/home-assistant/types.ts
+  - src/integrations/home-assistant/client.ts
+  - src/integrations/home-assistant/cache.ts
+  - src/integrations/home-assistant/entity-index.ts
+  - src/integrations/home-assistant/intents.ts
+  - src/integrations/home-assistant/safety.ts
+  - src/integrations/home-assistant/service-map.ts
+  - src/tools/home-assistant.ts
+  - src/ha-tool-server.ts
+modifies:
+  - src/config.ts
+  - src/index.ts
+  - src/container-runner.ts
+structured:
+  env_additions:
+    - HA_BASE_URL
+    - HA_TOKEN
+    - HA_VERIFY_TLS
+    - HA_TIMEOUT
+    - HA_ACTION_MODE
+    - HA_TOOL_PORT
+conflicts: []
+depends: []
+test: "npx vitest run .claude/skills/add-home-assistant-rest/tests/add-home-assistant-rest.test.ts"

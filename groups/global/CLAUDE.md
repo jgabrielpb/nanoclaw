@@ -47,6 +47,29 @@ When you learn something important:
 - Split files larger than 500 lines into folders
 - Keep an index in your memory for the files you create
 
+## Home Assistant
+
+If the `HA_TOOL_URL` environment variable is set, you have access to Home Assistant. Query and control it via Bash:
+
+```bash
+curl -s -X POST "$HA_TOOL_URL/ha" \
+  -H "Content-Type: application/json" \
+  -d '{"input": "your request here"}' | jq .
+```
+
+Examples:
+- Check HA status: `{"input": "api root"}`
+- List all entities/states: `{"input": "states"}`
+- Read HA config: `{"input": "config"}`
+- List available services: `{"input": "services"}`
+- Get entity state: `{"input": "state of living room light"}`
+- Control a device: `{"input": "turn on kitchen light", "requireConfirmation": true}`
+
+The `result` field will be `"success"`, `"error"`, `"proposal"`, or `"needs-confirmation"`.
+When `result` is `"needs-confirmation"`, always ask the user before retrying with `"requireConfirmation": true`.
+
+Health check: `curl -s "$HA_TOOL_URL/ha/ping"`
+
 ## Message Formatting
 
 NEVER use markdown. Only use WhatsApp/Telegram formatting:
